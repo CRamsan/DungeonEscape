@@ -7,7 +7,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 
 class Vector():
         
-        def __init__(self, x, y):
+        def __init__(self, x=0, y=0):
             self.x = x
             self.y = y
             self.mag = self.magnitude
@@ -56,7 +56,7 @@ def Polygon():
             
     def build_edges(self):
         self.edges[:] = []
-        for i in len(self.points):
+        for i in range(len(self.points)):
             p1 = self.points[i]
             if i + 1 >= len(self.points):
                 p2 = self.points[0]
@@ -89,5 +89,93 @@ def Polygon():
             result += "{" + str(point) + "}"
         return result;
 
+
+def Collision():
+
+        def polygon_collision(self, polygonA, polygonB, velocity):
+
+
+            Intersect = True
+            WillIntersect = True
+
+            edgeCountA = len(polygonA.edges)
+            edgeCountB = len(polygonB.edges)
+            minIntervalDistance = float("inf")
+            translationAxis = Vector()
+
+            for edgeIndex in range(edgeCountA + edgeCountB):
+                if edgeIndex < edgeCountA:
+                    edge = polygonA.edges[edgeIndex]
+                else:
+                    edge = polygonB.edges[edgeIndex - edgeCountA]
+        
+
+                axis = Vector(-edge.Y, edge.X)
+                axis.normalize()
+                
+                resA = self.project_polygon(axis, polygonA)
+                resB = self.project_polygon(axis, polygonB)
+
+                minA = resA[0]
+                minB = resA[1]
+                maxA = resB[0]
+                maxB = resB[1]
+
+                if (self.interval_distance(minA, maxA, minB, maxB) > 0) :
+                    Intersect = False
+
+                velocityProjection = axis.dot_product(velocity);
+
+                if velocityProjection < 0:
+                    minA += velocityProjection
+                else:
+                    maxA += velocityProjection
+        
+
+                intervalDistance = self.interval_distance(minA, maxA, minB, maxB);
+                if intervalDistance > 0:
+                    WillIntersect = False
+
+                if not Intersect and not WillIntersect:
+                    break
+
+
+                intervalDistance = math.fabs(intervalDistance)
+                if intervalDistance < minIntervalDistance:        
+                    minIntervalDistance = intervalDistance
+                    translationAxis = axis
+                    
+                    d = polygonA.center() - polygonB.center()
+                    if d.dot_product(translationAxis) < 0:
+                        translationAxis = -translationAxis
+            
+            if WillIntersect:
+                MinimumTranslationVector = translationAxis * minIntervalDistance
+
+            return WillIntersect, Intersect, MinimumTranslationVector
+
+
+        def interval_distance(self, minA, maxA, minB, maxB):
+            if minA < minB:
+                return minB - maxA;
+            else:
+                return minA - maxB;
+    
+        def project_polygon(self, axis, polygon):
+
+            d = axis.dot_product(polygon.points[0])
+            minP = d
+            maxP = d
+            for i in range(len(polygon.points)):
+                d = polygon.points[i].dot_product(axis);
+                if d < minP:        
+                    minP = d
+                else:
+                    if d > maxP:
+                        maxP = d;
+            return minP, maxP
+            
+        
+    
 
 
