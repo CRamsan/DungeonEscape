@@ -7,7 +7,6 @@ from player import Player
 class Game(drawable):
     
     def __init__(self):
-        self.id = None
         self.state = 'Not Started'
         self.players = []
         self.turn = 0;
@@ -29,6 +28,9 @@ class Game(drawable):
         for player in self.players :
             if player.id == playerid:
                 return player
+    
+    def start(self):
+        pass
     
     def draw(self, pygame, pygame, screen):
         pygame.draw.rect(screen, (  0,   0,   0), [75, 10, 50, 20], 2)

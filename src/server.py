@@ -69,49 +69,45 @@ class GetHandler(BaseHTTPRequestHandler):
             return
         elif len(path) == 1:
             if path[0] == 'join':
-                print server.joing_game(form[form.keys()[0]].value)
+                print server.join_game(form[form.keys()[0]].value)
                 return 'joined'
             else :
                 return 'failed'
         else :
-            player = server.get_game(path[0]).get_player(path[1])
-            if player.validate_token(path[2]) :
-                player.get_unit(path[3])
+            player = server.game.get_player(path[0])
+            if player.validate_token(path[1]) :
+                player.get_unit(path[2])
             return
         pass
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     """Handle requests in a separate thread."""
-    games = []
     
-    def spawn_new_game(self):
-        print 'Creating new game'
-        newGame = Game()
-        newGame.start_new_game()
-        self.games.append(newGame)
-        return newGame.id
+    game = None
+    semafore = None
     
-    def joing_game(self, name):
-        print 'Looking for a game where' + name + 'can be added'
-        game = self.get_next_game()
-        newPlayer = game.add_new_player(name)
-        return [game.id, newPlayer[0], newPlayer[1]]
-        
-    def get_next_game(self):
-        for game in self.games:
-            if len(game.players) < 4:
-                print 'Game found'
-                return game
-        return self.get_game(self.spawn_new_game())
+    def init_game(self):
+        print 'Starting to listen for players'
+        self.game = Game()
+        self.game.start_new_game()
+        self.semafore = threading.Condition()
     
-    def get_game(self, gameid):
-        for game in self.games:
-            if game.id == gameid:
-                return game
+    def join_game(self, name):
+        print 'Adding ' + name + 'to game'
+        newPlayer = self.game.add_new_player(name)
+        if len(self.game.players) == 4:
+            self.semafore.notifyAll()
+        else:
+            self.semafore.wait()
+        return [self.game.id, newPlayer[0], newPlayer[1]]
+    
+    def start_game(self, name):
+        print 'All players ready, starting game'
             
 if __name__ == "__main__":
     server = ThreadedHTTPServer(('localhost', 8686), GetHandler)
     print 'Starting server'
+    server.init_game()
     server.serve_forever()    
     sys.exit(0)

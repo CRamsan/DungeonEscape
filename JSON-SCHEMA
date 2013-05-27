@@ -1,13 +1,11 @@
 http://address:port/join?[name] will produce
 {
-	"gameID" : "2n5d0sjq"
 	"playerID" : "m5n3wd3j"
 	"playerToken" : "1hdn4d0n3bna"
 }
 
-http://address:port/$gameID/?[information]
+http://address:port/?[information]
 {
-	"id" : "2n5d0sjq"
 	"players" : "4"
 	"activePlayers" : "3"
 	"inactivePlayers" : "1"
@@ -15,14 +13,14 @@ http://address:port/$gameID/?[information]
 	"currentTurn" : "1250"
 }
 
-http://address:port/$gameID/$playerID/?[information]
+http://address:port/$playerID/?[information]
 {
 	"id" : "m5n3wd3j"
 	"name" : "Carl"
 	"status" : "active"
 }
 
-http://address:port/$gameID/$playerID/$unitID/$token/?[information]
+http://address:port/$playerID/$unitID/$token/?[information]
 {
 	"id" : "k6ms32dc"
 	"x" : 48.8
@@ -31,7 +29,7 @@ http://address:port/$gameID/$playerID/$unitID/$token/?[information]
 	"condition" : "normal"
 }
 
-http://address:port/$gameID/$playerID/$unitID/$token/?[action]
+http://address:port/$playerID/$unitID/$token/?[action]
 {
 	"dx" : 0
 	"dy" : 1
