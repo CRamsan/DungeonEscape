@@ -1,6 +1,6 @@
 To join a game do a POST request to:
 
-http://address:port/join?[attributes...] - (valid attributes are {name, id, color})
+http://address:port/join?[name]
 	This will return you a game ID, your unique ID and a secret token.
 
 To retrieve data from the game do a GET request to:
