@@ -1,4 +1,4 @@
-http://address:port/join?[attributes...] will produce
+http://address:port/join?[name] will produce
 {
 	"gameID" : "2n5d0sjq"
 	"playerID" : "m5n3wd3j"
@@ -19,7 +19,6 @@ http://address:port/$gameID/$playerID/?[information]
 {
 	"id" : "m5n3wd3j"
 	"name" : "Carl"
-	"color" : "blue"
 	"status" : "active"
 }
 
