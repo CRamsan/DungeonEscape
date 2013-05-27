@@ -39,87 +39,55 @@ class Vector():
         def __mul__(self, vector_a, multiplier):
             return Vector(vector_a.x * multiplier, vector_a.y * multiplier);
 
-        def equals(self, obj):
+        def __eq__(self, obj):
             return self.x == obj.x and self.y == obj.y
-
-
+        
+        def __ne__(self, obj):
+            return self.x != obj.X or self.y != obj.y
+        
+        def __str__(self):
+            return str(self.x) + ", " + str(self.y)
+            
 def Polygon():
     
     def __init__(self, x, y):
         self.points = []
         self.edges = []
             
-        public void BuildEdges()
-        {
-            Vector p1;
-            Vector p2;
-            edges.Clear();
-            for (int i = 0; i < points.Count; i++)
-            {
-                p1 = points[i];
-                if (i + 1 >= points.Count)
-                {
-                    p2 = points[0];
-                }
-                else
-                {
-                    p2 = points[i + 1];
-                }
-                edges.Add(p2 - p1);
-            }
-        }
+    def build_edges(self):
+        self.edges[:] = []
+        for i in len(self.points):
+            p1 = self.points[i]
+            if i + 1 >= len(self.points):
+                p2 = self.points[0]
+            else:
+                p2 = self.points[i + 1]
+            self.edges.append(p2 - p1);
 
-        public List<Vector> Edges
-        {
-            get { return edges; }
-        }
 
-        public List<Vector> Points
-        {
-            get { return points; }
-        }
+    def center(self):
+        totalx = 0
+        totaly = 0
+        for point in self.points:
+            totalx += point.x;
+            totaly += point.y;
 
-        public Vector Center
-        {
-            get
-            {
-                float totalX = 0;
-                float totalY = 0;
-                for (int i = 0; i < points.Count; i++)
-                {
-                    totalX += points[i].X;
-                    totalY += points[i].Y;
-                }
+        return Vector(totalx / len(self.points), totaly / len(self.points));
 
-                return new Vector(totalX / (float)points.Count, totalY / (float)points.Count);
-            }
-        }
 
-        public void Offset(Vector v)
-        {
-            Offset(v.X, v.Y);
-        }
+    def offset(self, x, y):
+        for point in self.points:
+            point = Vector(point.x + x, point.y + y);
 
-        public void Offset(float x, float y)
-        {
-            for (int i = 0; i < points.Count; i++)
-            {
-                Vector p = points[i];
-                points[i] = new Vector(p.X + x, p.Y + y);
-            }
-        }
 
-        public override string ToString()
-        {
-            string result = "";
 
-            for (int i = 0; i < points.Count; i++)
-            {
-                if (result != "") result += " ";
-                result += "{" + points[i].ToString(true) + "}";
-            }
+    def __str__ (self):
+        result = ''
+        for point in self.points:
+            if result != "":
+                result += " "
+            result += "{" + str(point) + "}"
+        return result;
 
-            return result;
-        }
 
-    }
+
