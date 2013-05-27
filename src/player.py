@@ -1,6 +1,7 @@
 import util
+from viz import drawable
 
-class Player():
+class Player(drawable):
     
     def __init__(self, name):
         self.id = util.id_generator()
@@ -16,3 +17,6 @@ class Player():
         for unit in self.units :
             if unit.id == unitid:
                 return unit
+            
+    def draw(self, pygame, pygame, screen):
+        pygame.draw.line(screen, (0 , 255, 0), [0, 0], [50, 30], 5)

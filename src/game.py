@@ -1,9 +1,10 @@
 import util
 import player
+from viz import drawable
 
 from player import Player
 
-class Game():
+class Game(drawable):
     
     def __init__(self):
         self.id = None
@@ -28,3 +29,6 @@ class Game():
         for player in self.players :
             if player.id == playerid:
                 return player
+    
+    def draw(self, pygame, pygame, screen):
+        pygame.draw.rect(screen, (  0,   0,   0), [75, 10, 50, 20], 2)

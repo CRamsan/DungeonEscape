@@ -44,3 +44,7 @@ while not done:
  
 # Be IDLE friendly
 pygame.quit()
+
+class drawable():
+    def draw(self, pygame, screen):
+        pass
