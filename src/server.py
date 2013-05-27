@@ -2,28 +2,40 @@
 # encoding: utf-8
 
 import sys
-import os
 
 from BaseHTTPServer import BaseHTTPRequestHandler
 from BaseHTTPServer import HTTPServer
 from SocketServer import ThreadingMixIn
+
 import threading
 import urlparse
 import cgi
 
+import game
+from game import Game
+from miro.databaseupgrade import get_next_id
+
+server = None;
+
 class GetHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200)
-        self.end_headers()
-        self.send_response(200)
-        self.end_headers()
-        message =  threading.currentThread().getName()
-        self.wfile.write(message)
-        self.wfile.write('\n')
+        parsed_path = urlparse.urlparse(self.path)
+        message = '|'.join([
+        threading.currentThread().getName(),
+        'client_address=%s (%s)' % (self.client_address,self.address_string()),
+        'command=%s' % self.command,
+        'path=%s' % parsed_path.path,
+        'query=%s' % parsed_path.query,
+        ]) 
+        print message
+        
+        arguments = filter(None, parsed_path.path.split('/'))
+        result = self.get_Execute(arguments, parsed_path.query)
+        self.wfile.write(result)
         return
 
-def do_POST(self):
-    # Parse the form data posted
+    def do_POST(self):
+        # Parse the form data posted
         form = cgi.FieldStorage(
         fp=self.rfile, 
         headers=self.headers,
@@ -32,29 +44,70 @@ def do_POST(self):
         })
         
         # Begin the response
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write('Client: %s\n' % str(self.client_address))
-        self.wfile.write('Path: %s\n' % self.path)
-        self.wfile.write('Form data:\n')
+        message = '|'.join([
+        threading.currentThread().getName(),
+        'client_address=%s (%s)' % (self.client_address,self.address_string()),
+        'command=%s' % self.command,
+        'path=%s' % self.path])
         
-        # Echo back information about what was posted in the form
+        arguments = filter(None, self.path.split('/'))
+        
         for field in form.keys():
-            field_item = form[field]
-        if field_item.filename:
-            # The field contains an uploaded file
-            file_data = field_item.file.read()
-            file_len = len(file_data)
-            del file_data
-            self.wfile.write('\tUploaded %s (%d bytes)\n' % (field, 
-            file_len))
-        else:
-            # Regular form value
-            self.wfile.write('\t%s=%s\n' % (field, form[field].value))
+            message = '|'.join([message,'%s=%s' % (field, form[field].value)])
+        print message
+        
+        result = self.post_Execute(arguments, form)
+        self.wfile.write(result)
         return
+
+    def get_Execute(self, path, query):
+        pass
+    
+    def post_Execute(self, path, form):
+        if len(path) == 0:
+            return
+        elif len(path) == 1:
+            if path[0] == 'join':
+                print server.joing_game(form[form.keys()[0]].value)
+                return 'joined'
+            else :
+                return 'failed'
+        else :
+            player = server.get_game(path[0]).get_player(path[1])
+            if player.validate_token(path[2]) :
+                player.get_unit(path[3])
+            return
+        pass
+
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     """Handle requests in a separate thread."""
+    games = []
+    
+    def start_new_game(self):
+        print 'Creating new game'
+        newGame = Game()
+        newGame.start_new_game()
+        self.games.append(newGame)
+        return newGame.id
+    
+    def joing_game(self, name):
+        print 'Looking for a game where' + name + 'can be added'
+        game = self.get_next_game()
+        newPlayer = game.add_new_player(name)
+        return [game.id, newPlayer[0], newPlayer[1]]
+    
+    def get_next_game(self):
+        for game in self.games:
+            if len(game.players) < 4:
+                print 'Game found'
+                return game
+        return self.get_game(self.start_new_game())
+    
+    def get_game(self, gameid):
+        for game in self.games:
+            if game.id == gameid:
+                return game
 
 if __name__ == "__main__":
     server = ThreadedHTTPServer(('localhost', 8686), GetHandler)
