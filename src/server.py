@@ -2,7 +2,9 @@
 # encoding: utf-8
 
 import sys
+import pygame
 
+from pygame.locals import * 
 from BaseHTTPServer import BaseHTTPRequestHandler
 from BaseHTTPServer import HTTPServer
 from SocketServer import ThreadingMixIn
@@ -13,7 +15,6 @@ import cgi
 
 import game
 from game import Game
-from miro.databaseupgrade import get_next_id
 
 server = None;
 
@@ -84,7 +85,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     """Handle requests in a separate thread."""
     games = []
     
-    def start_new_game(self):
+    def spawn_new_game(self):
         print 'Creating new game'
         newGame = Game()
         newGame.start_new_game()
@@ -96,19 +97,19 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         game = self.get_next_game()
         newPlayer = game.add_new_player(name)
         return [game.id, newPlayer[0], newPlayer[1]]
-    
+        
     def get_next_game(self):
         for game in self.games:
             if len(game.players) < 4:
                 print 'Game found'
                 return game
-        return self.get_game(self.start_new_game())
+        return self.get_game(self.spawn_new_game())
     
     def get_game(self, gameid):
         for game in self.games:
             if game.id == gameid:
                 return game
-
+            
 if __name__ == "__main__":
     server = ThreadedHTTPServer(('localhost', 8686), GetHandler)
     print 'Starting server'
