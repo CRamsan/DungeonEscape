@@ -36,9 +36,9 @@ class Vector():
         def __sub__(self, vector_a, vector_b):
             return Vector(vector_a.x - vector_b.x, vector_a.y - vector_b.y);
 
-        def __mul__(self, vector_a, float):
-            return Vector(vector_a.x * float, vector_a.y * float);
+        def __mul__(self, vector_a, multiplier):
+            return Vector(vector_a.x * multiplier, vector_a.y * multiplier);
 
-        def equals(self, object):
-            return self.x == object.x and self.y == object.y
+        def equals(self, obj):
+            return self.x == obj.x and self.y == obj.y
 
