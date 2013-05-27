@@ -22,7 +22,7 @@ http://address:port/$gameID/$playerID/?[information]
 	"status" : "active"
 }
 
-http://address:port/$gameID/$unitID/$token/?[information]
+http://address:port/$gameID/$playerID/$unitID/$token/?[information]
 {
 	"id" : "k6ms32dc"
 	"x" : 48.8
@@ -31,7 +31,7 @@ http://address:port/$gameID/$unitID/$token/?[information]
 	"condition" : "normal"
 }
 
-http://address:port/$gameID/$unitID/$token/?[action]
+http://address:port/$gameID/$playerID/$unitID/$token/?[action]
 {
 	"dx" : 0
 	"dy" : 1

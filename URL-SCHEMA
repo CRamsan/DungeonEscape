@@ -1,6 +1,6 @@
 To join a game do a POST request to:
 
-http://address:port/join?[name]
+http://address:port/join [param=$name]
 	This will return you a game ID, your unique ID and a secret token.
 
 To retrieve data from the game do a GET request to:
@@ -11,10 +11,10 @@ http://address:port/$gameID/?[information] - (valid information is {player_info,
 http://address:port/$gameID/$playerID/?[information] - (valid information is {player_info})
 	Information about the a given player, you can use this to retrieve information from other players you encounter
 
-http://address:port/$gameID/$unitID/$token/?[information] - (valid information is {unit_info, unit__status})
+http://address:port/$gameID/$playerID/$unitID/$token/?[information] - (valid information is {unit_info, unit__status})
 	This will return you very important information about the units under your control
 
 To send an action, do a POST request to:
 
-http://address:port/$gameID/$unitID/$token/?[action] - (valid actions are {up, down, left, right, stay, none})
-You will receive the amount of distance moved
+http://address:port/$gameID/$playerID/$unitID/$token/ [param=$action] - (valid actions are {up, down, left, right, stay, none})
+	You will receive the amount of distance moved
