@@ -1,0 +1,39 @@
+http://address:port/join?[attributes...] will produce
+{
+	"gameID" : "2n5d0sjq"
+	"playerID" : "m5n3wd3j"
+	"playerToken" : "1hdn4d0n3bna"
+}
+
+http://address:port/$gameID/?[information]
+{
+	"id" : "2n5d0sjq"
+	"players" : "4"
+	"activePlayers" : "3"
+	"inactivePlayers" : "1"
+	"maxTurns" : "4000"
+	"currentTurn" : "1250"
+}
+
+http://address:port/$gameID/$playerID/?[information]
+{
+	"id" : "m5n3wd3j"
+	"name" : "Carl"
+	"color" : "blue"
+	"status" : "active"
+}
+
+http://address:port/$gameID/$unitID/$token/?[information]
+{
+	"id" : "k6ms32dc"
+	"x" : 48.8
+	"y" : 67.4
+	"lastMove" : "up"
+	"condition" : "normal"
+}
+
+http://address:port/$gameID/$unitID/$token/?[action]
+{
+	"dx" : 0
+	"dy" : 1
+}
