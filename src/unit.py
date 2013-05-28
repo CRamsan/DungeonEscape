@@ -1,11 +1,12 @@
 import util
+from random import randint
 from viz import drawable
 
 SIZE = 20
-TL =   (20,   20)
-TR =   (760,   20)
-BR =   (760,   560)
-BL =   (20,   560)
+TL = (20, 20)
+TR = (760, 20)
+BR = (760, 560)
+BL = (20, 560)
 
 class Unit(drawable):
     
@@ -42,21 +43,30 @@ class Unit(drawable):
             self.x -= SIZE
             
     def up(self):
-        pass
+        self.y -= 1
 
     def down(self):
-        pass
+        self.y += 1
     
     def left(self):
-        pass
+        self.x -= 1
     
     def right(self):
-        pass 
+        self.x += 1
                
     def draw(self, pygame, screen):
         pygame.draw.rect(screen, (255, 255, 0), [self.x, self.y, SIZE, SIZE], 2) 
         
     def test(self):
-        pass
+        val = randint(0, 4)
+        if val == 0:
+            self.up()
+        elif val == 1:
+            self.down()
+        elif val == 2:
+            self.right()
+        elif val == 3:
+            self.left()
+        
 
     
