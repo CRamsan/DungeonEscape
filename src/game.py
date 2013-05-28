@@ -32,5 +32,7 @@ class Game(drawable):
     def start(self):
         pass
     
-    def draw(self, pygame, pygame, screen):
+    def draw(self, pygame, screen):
         pygame.draw.rect(screen, (  0,   0,   0), [75, 10, 50, 20], 2)
+        for drawable in self.players:
+            drawable.draw(pygame, screen)

@@ -18,5 +18,7 @@ class Player(drawable):
             if unit.id == unitid:
                 return unit
             
-    def draw(self, pygame, pygame, screen):
+    def draw(self, pygame, screen):
         pygame.draw.line(screen, (0 , 255, 0), [0, 0], [50, 30], 5)
+        for drawable in self.units:
+            drawable.draw(pygame, screen)

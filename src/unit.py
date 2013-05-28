@@ -11,7 +11,7 @@ class Unit(drawable):
         self.utype = utype
         
         
-    def draw(self, pygame, pygame, screen):
+    def draw(self, pygame, screen):
         pygame.draw.ellipse(screen, (255, 255, 0), [225, 10, 50, 20], 2) 
 
     

@@ -1,15 +1,14 @@
-#!/usr/local/bin/python2.7
+#!/usr/local/bin/python2
 # encoding: utf-8
 
 import sys
-import pygame
+import threading
+from viz import Visualizer
 
-from pygame.locals import * 
 from BaseHTTPServer import BaseHTTPRequestHandler
 from BaseHTTPServer import HTTPServer
 from SocketServer import ThreadingMixIn
 
-import threading
 import urlparse
 import cgi
 
@@ -17,6 +16,7 @@ import game
 from game import Game
 
 server = None;
+viz = None
 
 class GetHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -62,7 +62,23 @@ class GetHandler(BaseHTTPRequestHandler):
         return
 
     def get_Execute(self, path, query):
-        pass
+        if len(path) == 0:
+            return "game data"
+        elif len(path) == 1:
+            player = server.game.get_player(path[0])
+            return "player data"
+        elif len(path) == 3:
+            player = server.game.get_player(path[0])
+            if player.validate_token(path[1]) :
+                player.get_unit(path[2])
+            else:
+                return 'authentication failed'
+            val = query.split('=')[0]
+            if val == 'unit_info':
+                return 'unit found'
+            elif val == 'unit_status':
+                return 'unit status'
+        return 'not valid'
     
     def post_Execute(self, path, form):
         if len(path) == 0:
@@ -78,7 +94,7 @@ class GetHandler(BaseHTTPRequestHandler):
             if player.validate_token(path[1]) :
                 player.get_unit(path[2])
             return
-        pass
+        
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -94,12 +110,17 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         self.semafore = threading.Condition()
     
     def join_game(self, name):
-        print 'Adding ' + name + 'to game'
+        print 'Adding ' + name + ' to game'
         newPlayer = self.game.add_new_player(name)
+        self.semafore.acquire()
         if len(self.game.players) == 4:
-            self.semafore.notifyAll()
+            print name + ' is last player, sending signal'
+            self.semafore.notify_all()
         else:
+            print name + ' is waiting'
             self.semafore.wait()
+            print name + ' can continue'
+        self.semafore.release()
         return [self.game.id, newPlayer[0], newPlayer[1]]
     
     def start_game(self, name):
@@ -109,5 +130,18 @@ if __name__ == "__main__":
     server = ThreadedHTTPServer(('localhost', 8686), GetHandler)
     print 'Starting server'
     server.init_game()
+    viz = Visualizer()
+    
+    try:
+        print 'defining thread'
+        vis_thread = threading.Thread(target=viz.vis_loop(server.game))
+        print 'defining thread'
+        vis_thread.setDaemon(True)
+        print 'defining thread'
+        vis_thread.start()
+        print 'defining thread'
+    except:
+        print "Error: unable to start vis thread"
+        
     server.serve_forever()    
     sys.exit(0)
