@@ -3,13 +3,16 @@ from pygame.locals import *
 import random
 import time
 
+HEIGHT = 30
+WIDTH = 40
+
 class Visualizer():
     def vis_loop(self, game):      
-        BLACK = (  0,   0,   0)
+        BLACK = (0, 0, 0)
         WHITE = (255, 255, 255)
-        BLUE =  (  0,   0, 255)
-        GREEN = (  0, 255,   0)
-        RED =   (255,   0,   0)
+        BLUE = (0, 0, 255)
+        GREEN = (0, 255, 0)
+        RED = (255, 0, 0)
          
         pygame.init() 
          
@@ -26,7 +29,7 @@ class Visualizer():
         floor = pygame.image.load("../assets/green.png")
         floorrect = floor.get_rect()
         
-        #Loop until the user clicks the close button.
+        # Loop until the user clicks the close button.
         done = False
         clock = pygame.time.Clock()
          
@@ -36,9 +39,9 @@ class Visualizer():
             # Leave this out and we will use all CPU we can.
             '''clock.tick(10)'''
             
-            for event in pygame.event.get(): # User did something
-                if event.type == pygame.QUIT: # If user clicked close
-                    done=True # Flag that we are done so we exit this loop
+            for event in pygame.event.get():  # User did something
+                if event.type == pygame.QUIT:  # If user clicked close
+                    done = True  # Flag that we are done so we exit this loop
          
             # All drawing code happens after the for loop and but
             # inside the main while done==False loop.
@@ -47,9 +50,7 @@ class Visualizer():
             screen.fill(BLACK)
             
             game.draw(pygame, screen)
-            
-            pygame.draw.ellipse(screen, RED, [300, 10, 50, 20]) 
-            
+                        
             # Go ahead and update the screen with what we've drawn.
             # This MUST happen after all the other drawing commands.
             pygame.display.flip()

@@ -43,16 +43,20 @@ class Unit(drawable):
             self.x -= SIZE
             
     def up(self):
-        self.y -= 1
+        if self.x % 20 == 0 and self.y > 0: 
+            self.y -= 1
 
     def down(self):
-        self.y += 1
+        if self.x % 20 == 0 and self.y < 600:
+            self.y += 1
     
     def left(self):
-        self.x -= 1
+        if self.y % 20 == 0 and self.x > 0:
+            self.x -= 1
     
     def right(self):
-        self.x += 1
+        if self.y % 20 == 0 and self.x < 800:
+            self.x += 1
                
     def draw(self, pygame, screen):
         pygame.draw.rect(screen, (255, 255, 0), [self.x, self.y, SIZE, SIZE], 2) 
