@@ -12,7 +12,6 @@ from SocketServer import ThreadingMixIn
 import urlparse
 import cgi
 
-import game
 from game import Game
 
 server = None;
@@ -135,8 +134,6 @@ if __name__ == "__main__":
     try:
         print 'defining thread'
         vis_thread = threading.Thread(target=viz.vis_loop(server.game))
-        print 'defining thread'
-        vis_thread.setDaemon(True)
         print 'defining thread'
         vis_thread.start()
         print 'defining thread'
