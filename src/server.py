@@ -132,11 +132,8 @@ if __name__ == "__main__":
     viz = Visualizer()
     
     try:
-        print 'defining thread'
-        vis_thread = threading.Thread(target=viz.vis_loop(server.game))
-        print 'defining thread'
+        vis_thread = threading.Thread(target=viz.vis_loop, args=(server.game,))
         vis_thread.start()
-        print 'defining thread'
     except:
         print "Error: unable to start vis thread"
         
