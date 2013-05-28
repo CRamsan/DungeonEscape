@@ -17,7 +17,7 @@ class Game(drawable):
             
     def add_new_player(self, name):
         if len(self.players) < 4:
-            newPlayer = Player(name)
+            newPlayer = Player(name, len(self.players) + 1)
             self.players.append(newPlayer)
             return [newPlayer.id,newPlayer.token]
     
@@ -36,3 +36,7 @@ class Game(drawable):
         pygame.draw.rect(screen, (  0,   0,   0), [75, 10, 50, 20], 2)
         for drawable in self.players:
             drawable.draw(pygame, screen)
+            
+    def test(self):
+        for player in self.players:
+            player.test()
