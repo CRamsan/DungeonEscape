@@ -137,5 +137,5 @@ if __name__ == "__main__":
     except:
         print "Error: unable to start vis thread"
         
-    '''server.serve_forever()'''    
+    server.serve_forever()
     sys.exit(0)
