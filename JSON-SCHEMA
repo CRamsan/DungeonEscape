@@ -7,26 +7,40 @@ http://address:port/join?[name] will produce
 http://address:port/?[information]
 {
 	"players" : "4"
-	"activePlayers" : "3"
-	"inactivePlayers" : "1"
-	"maxTurns" : "4000"
-	"currentTurn" : "1250"
 }
 
 http://address:port/$playerID/?[information]
 {
 	"id" : "m5n3wd3j"
 	"name" : "Carl"
-	"status" : "active"
 }
 
 http://address:port/$playerID/$unitID/$token/?[information]
+if information is unit_info
 {
 	"id" : "k6ms32dc"
 	"x" : 48.8
 	"y" : 67.4
-	"lastMove" : "up"
 	"condition" : "normal"
+}
+if information is unit_vision
+{
+	"units":[
+		{
+			"id" : "k6ms32dc"
+			"x" : 48.8
+			"y" : 67.4
+			"lastMove" : "up"
+			"condition" : "normal"
+		},{
+			"id" : "k6ms32dc"
+			"x" : 48.8
+			"y" : 67.4
+			"lastMove" : "up"
+			"condition" : "normal"
+		}
+	]
+
 }
 
 http://address:port/$playerID/$unitID/$token/?[action]

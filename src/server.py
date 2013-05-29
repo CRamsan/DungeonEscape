@@ -22,7 +22,7 @@ class GetHandler(BaseHTTPRequestHandler):
         parsed_path = urlparse.urlparse(self.path)
         message = '|'.join([
         threading.currentThread().getName(),
-        'client_address=%s (%s)' % (self.client_address,self.address_string()),
+        'client_address=%s (%s)' % (self.client_address, self.address_string()),
         'command=%s' % self.command,
         'path=%s' % parsed_path.path,
         'query=%s' % parsed_path.query,
@@ -37,7 +37,7 @@ class GetHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         # Parse the form data posted
         form = cgi.FieldStorage(
-        fp=self.rfile, 
+        fp=self.rfile,
         headers=self.headers,
         environ={'REQUEST_METHOD':'POST',
         'CONTENT_TYPE':self.headers['Content-Type'],
@@ -46,14 +46,14 @@ class GetHandler(BaseHTTPRequestHandler):
         # Begin the response
         message = '|'.join([
         threading.currentThread().getName(),
-        'client_address=%s (%s)' % (self.client_address,self.address_string()),
+        'client_address=%s (%s)' % (self.client_address, self.address_string()),
         'command=%s' % self.command,
         'path=%s' % self.path])
         
         arguments = filter(None, self.path.split('/'))
         
         for field in form.keys():
-            message = '|'.join([message,'%s=%s' % (field, form[field].value)])
+            message = '|'.join([message, '%s=%s' % (field, form[field].value)])
         print message
         
         result = self.post_Execute(arguments, form)
@@ -62,38 +62,37 @@ class GetHandler(BaseHTTPRequestHandler):
 
     def get_Execute(self, path, query):
         if len(path) == 0:
-            return "game data"
+            return server.game.to_json()
         elif len(path) == 1:
-            player = server.game.get_player(path[0])
-            return "player data"
+            return server.game.get_player(path[0]).to_json()
         elif len(path) == 3:
             player = server.game.get_player(path[0])
+            target = None
             if player.validate_token(path[1]) :
-                player.get_unit(path[2])
+                target = player.get_unit(path[2])
             else:
-                return 'authentication failed'
+                return '{"result":"failed"}'
             val = query.split('=')[0]
             if val == 'unit_info':
-                return 'unit found'
-            elif val == 'unit_status':
-                return 'unit status'
-        return 'not valid'
+                return target.to_json()
+            elif val == 'unit_vision':
+                return target.vision_to_json()
+        return '{"result":"failed"}'
     
     def post_Execute(self, path, form):
         if len(path) == 0:
             return
         elif len(path) == 1:
             if path[0] == 'join':
-                print server.join_game(form[form.keys()[0]].value)
-                return 'joined'
+                return server.join_game(form[form.keys()[0]].value) 
             else :
-                return 'failed'
+                return '{"result":"failed"}'
         else :
             player = server.game.get_player(path[0])
             if player.validate_token(path[1]) :
-                player.get_unit(path[2])
-            return
-        
+                return self.game.execute_command(player, player.get_unit(path[2]), form[form.keys()[0]].value) 
+            else:   
+                return '{"result":"failed"}'
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -112,15 +111,23 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         print 'Adding ' + name + ' to game'
         newPlayer = self.game.add_new_player(name)
         self.semafore.acquire()
-        if len(self.game.players) == 4:
-            print name + ' is last player, sending signal'
-            self.semafore.notify_all()
-        else:
+        if len(self.game.players) < 4:
             print name + ' is waiting'
             self.semafore.wait()
             print name + ' can continue'
-        self.semafore.release()
-        return [self.game.id, newPlayer[0], newPlayer[1]]
+            self.semafore.release()
+            return '{ "playerID" : "' + newPlayer[0] + '", "playerToken" : "' + newPlayer[1] + '"}'
+        elif len(self.game.players) == 4:                        
+            print name + ' is last player, sending signal'
+            self.semafore.notify_all()
+            self.semafore.release()
+            return '{ "playerID" : "' + newPlayer[0] + '", "playerToken" : "' + newPlayer[1] + '"}'
+        else:
+            print name + ' is trying to join but game is full'
+            return '{"result":"failed"}'
+
+
+
     
     def start_game(self, name):
         print 'All players ready, starting game'

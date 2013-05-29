@@ -123,8 +123,5 @@ class Game(drawable):
         for drawable in self.players:
             drawable.draw(pygame, screen)
             
-    def test(self):              
-        for player in self.players:
-            for unit in player.units:
-                self.execute_command(player.id, unit.id, 'right')
-            
+    def to_json(self):
+        return '{ "players" : "' + str(len(self.players)) + '"}'

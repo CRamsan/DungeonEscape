@@ -29,7 +29,6 @@ class Player(drawable):
     def draw(self, pygame, screen):
         for drawable in self.units:
             drawable.draw(pygame, screen)
-
-    def test(self):
-        for unit in self.units:
-            unit.test()
+            
+    def to_json(self):
+        return '{ "id" : "' + self.id + ', "name" : "' + self.name + ' "}'

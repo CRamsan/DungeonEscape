@@ -55,7 +55,7 @@ class Visualizer():
             # This MUST happen after all the other drawing commands.
             pygame.display.flip()
             
-            game.test()
+            '''game.test()'''
             
         # Be IDLE friendly
         pygame.quit()

@@ -11,7 +11,7 @@ http://address:port/?[information] - (valid information is {player_info, game_st
 http://address:port/$playerID/?[information] - (valid information is {player_info})
 	Information about the a given player, you can use this to retrieve information from other players you encounter
 
-http://address:port/$playerID/$unitID/$token/?[information] - (valid information is {unit_info, unit__status})
+http://address:port/$playerID/$unitID/$token/?[information] - (valid information is {unit_info, unit_vision})
 	This will return you very important information about the units under your control
 
 To send an action, do a POST request to:

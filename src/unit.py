@@ -28,9 +28,7 @@ class Unit(drawable):
         elif self.owner == 4 :
             self.x = BL[0]
             self.y = BL[1]            
-        
-        print str(self.x) + '+' + str(self.y)
-        
+                
         if self.utype == 'A' :
             pass
         elif self.utype == 'B' :
@@ -60,17 +58,10 @@ class Unit(drawable):
                
     def draw(self, pygame, screen):
         pygame.draw.rect(screen, (255, 255, 0), [self.x, self.y, SIZE, SIZE], 2) 
-        
-    def test(self):
-        val = randint(0, 4)
-        if val == 0:
-            self.up()
-        elif val == 1:
-            self.down()
-        elif val == 2:
-            self.right()
-        elif val == 3:
-            self.left()
-        
 
     
+    def to_json(self):
+        return '{ "id" : "' + self.id + ', "x" : "' + self.x + '", "y" : "' + self.y + '", "condition" : "' + self.condition + '" }'
+    
+    def vision_to_json(self):
+        return '{}'
