@@ -47,7 +47,7 @@ class Unit(drawable):
             self.y -= 1
 
     def down(self):
-        if self.x % 20 == 0 and self.y < 600:
+        if self.x % 20 == 0 and self.y < 580:
             self.y += 1
     
     def left(self):
@@ -55,7 +55,7 @@ class Unit(drawable):
             self.x -= 1
     
     def right(self):
-        if self.y % 20 == 0 and self.x < 800:
+        if self.y % 20 == 0 and self.x < 780:
             self.x += 1
                
     def draw(self, pygame, screen):

@@ -126,7 +126,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         print 'All players ready, starting game'
             
 if __name__ == "__main__":
-    server = ThreadedHTTPServer(('localhost', 8287), GetHandler)
+    server = ThreadedHTTPServer(('localhost', 1866), GetHandler)
     print 'Starting server'
     server.init_game()
     viz = Visualizer()
@@ -137,9 +137,5 @@ if __name__ == "__main__":
     except:
         print "Error: unable to start vis thread"
         
-    server.join_game('Player 1')
-    server.join_game('Player 2')
-    server.join_game('Player 3')
-    server.join_game('Player 4')
     '''server.serve_forever()'''    
     sys.exit(0)

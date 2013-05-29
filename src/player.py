@@ -11,14 +11,12 @@ class Player(drawable):
         self.name = name
         self.units = []
         self.token = util.id_generator(12)
-        
-        print number
-        
-        self.units.append(Unit('A', number))
-        self.units.append(Unit('B', number))
-        self.units.append(Unit('C', number))
-        self.units.append(Unit('D', number))
-        self.units.append(Unit('E', number))
+                
+        self.units.append(Unit('A', self.number))
+        self.units.append(Unit('B', self.number))
+        self.units.append(Unit('C', self.number))
+        self.units.append(Unit('D', self.number))
+        self.units.append(Unit('E', self.number))
         
     def validate_token(self, token):
         return self.token == token

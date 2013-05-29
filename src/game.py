@@ -12,48 +12,41 @@ BL = (20, 560)
 
 
 matrix = [
-['B', 'A', 'B', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['B', 'A', 'B', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'B', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
-['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B'],
+['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' , 'B', 'B' , 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
 ]
 
+print len(matrix)
+print len(matrix[29])
 
 class Game(drawable):
     
@@ -74,17 +67,18 @@ class Game(drawable):
     
     def execute_command(self, player, unit, command):
         target = self.get_player(player).get_unit(unit)
-        if command == 'up' :
-            if target.x % 10 == 0 and self.move_capable(target, command):
+        
+        moveCapable = self.move_capable(target, command)
+        if target.x % 20 == 0 and moveCapable:
+            if command == 'up' :
                 target.up()
-        elif command == 'down' :
-            pass
-        elif command == 'left' :
-            pass
-        elif command == 'right' :
-            pass
-        elif command == 'hold' :
-            pass
+            elif command == 'down' :
+                target.down()
+        if target.y % 20 == 0 and moveCapable:
+            if command == 'left' :
+                target.left()
+            elif command == 'right' :
+                target.right()
     
     def get_player(self, playerid):
         for player in self.players :
@@ -93,27 +87,27 @@ class Game(drawable):
     
     def start(self):
         pass
+    
     def move_capable(self, unit, command):
-        m_x = unit.x % 20
-        m_y = unit.y % 20
-        print str(m_x) + ':' + str(m_y)
+        m_x = int((unit.x / 20))
+        m_y = int((unit.y / 20))
         if command == 'up' :
-            if matrix[m_x][m_y - 1] == 'A':
+            if matrix[m_y - 1][m_x] == 'A':
                 return True
             else:
                 return False
         elif command == 'down' :
-            if matrix[m_x][m_y + 1] != 'A':
+            if matrix[m_y + 1][m_x] == 'A':
                 return True
             else:
                 return False
         elif command == 'left' :
-            if matrix[m_x - 1][m_y] != 'A':
+            if matrix[m_y][m_x - 1] == 'A':
                 return True
             else:
                 return False        
         elif command == 'right' :
-            if matrix[m_x + 1][m_y] != 'A':
+            if matrix[m_y][m_x + 1] == 'A':
                 return True
             else:
                 return False
@@ -123,14 +117,14 @@ class Game(drawable):
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
                 if matrix[i][j] == 'A':
-                    pygame.draw.rect(screen, (0, 0, 255), [20 * i, 20 * j, 20, 20], 2)
+                    pygame.draw.rect(screen, (0, 0, 255), [20 * j, 20 * i, 20, 20], 2)
                 elif matrix[i][j] == 'B':
-                    pygame.draw.rect(screen, (255, 0, 255), [20 * i, 20 * j, 20, 20], 2)
+                    pygame.draw.rect(screen, (255, 0, 255), [20 * j, 20 * i, 20, 20], 2)
         for drawable in self.players:
             drawable.draw(pygame, screen)
             
     def test(self):              
         for player in self.players:
             for unit in player.units:
-                self.execute_command(player.id, unit.id, 'up')
+                self.execute_command(player.id, unit.id, 'right')
             
