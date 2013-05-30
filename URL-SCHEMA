@@ -5,16 +5,19 @@ http://address:port/join [param=$name]
 
 To retrieve data from the game do a GET request to:
 
-http://address:port/?[information] - (valid information is {player_info, game_status})
+http://address:port/?
 	This will return you information about the player or the entire game
 
-http://address:port/$playerID/?[information] - (valid information is {player_info})
+http://address:port/$playerID/?
 	Information about the a given player, you can use this to retrieve information from other players you encounter
 
-http://address:port/$playerID/$unitID/$token/?[information] - (valid information is {unit_info, unit_vision})
+http://address:port/$playerID/$token/?
+	Private information about the a given player, you can use this to retrieve your units
+
+http://address:port/$playerID/$token/$unitID/?[information] - (valid information is {unit_info, unit_vision})
 	This will return you very important information about the units under your control
 
 To send an action, do a POST request to:
 
-http://address:port/$playerID/$unitID/$token/ [param=$action] - (valid actions are {up, down, left, right, stay, none})
+http://address:port/$playerID/$token/$unitID/ [param=$action] - (valid actions are {up, down, left, right, stay, none})
 	You will receive the amount of distance moved

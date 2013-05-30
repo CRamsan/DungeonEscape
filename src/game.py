@@ -1,5 +1,6 @@
 import util
 import player
+from math import fabs
 from viz import drawable
 
 from player import Player
@@ -10,6 +11,7 @@ TR = (760, 20)
 BR = (760, 560)
 BL = (20, 560)
 
+units = []
 
 matrix = [
 ['B', 'A', 'B', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A' , 'A', 'A' , 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'A', 'B', 'B'],
@@ -63,22 +65,30 @@ class Game(drawable):
         if len(self.players) < 4:
             newPlayer = Player(name, len(self.players) + 1)
             self.players.append(newPlayer)
+            for unit in newPlayer.units:
+                units.append(unit)
             return [newPlayer.id, newPlayer.token]
     
     def execute_command(self, player, unit, command):
         target = self.get_player(player).get_unit(unit)
         
         moveCapable = self.move_capable(target, command)
+        print moveCapable
         if target.x % 20 == 0 and moveCapable:
             if command == 'up' :
-                target.up()
+                return target.up()
             elif command == 'down' :
-                target.down()
+                return target.down()
+            else:
+                return '{"result":"failed"}'
         if target.y % 20 == 0 and moveCapable:
             if command == 'left' :
-                target.left()
+                return target.left()
             elif command == 'right' :
-                target.right()
+                return target.right()
+            else:
+                return '{"result":"failed"}'
+        return '{"result":"failed"}'
     
     def get_player(self, playerid):
         for player in self.players :
@@ -122,6 +132,19 @@ class Game(drawable):
                     pygame.draw.rect(screen, (255, 0, 255), [20 * j, 20 * i, 20, 20], 2)
         for drawable in self.players:
             drawable.draw(pygame, screen)
+            
+    def vision_to_json(self, target):
+        found = []
+        for unit in units:
+            if  fabs(unit.x - target.x) < 10 and fabs(unit.y - target.y) < 10 :
+                if unit.owner != target.owner :
+                    found.append(unit)
+        message = '{ "units":[ '
+        for unit in found:
+            message += unit.to_json() + ", "
+        message += ' ]}'
+        return message
+        
             
     def to_json(self):
         return '{ "players" : "' + str(len(self.players)) + '"}'

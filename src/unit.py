@@ -11,7 +11,8 @@ BL = (20, 560)
 class Unit(drawable):
     
     def __init__(self, utype, owner):
-        self.id = util.id_generator()
+        '''self.id = util.id_generator()'''
+        self.id = 'ABC'
         self.condition = 'Normal'
         self.owner = owner
         self.utype = utype
@@ -43,25 +44,34 @@ class Unit(drawable):
     def up(self):
         if self.x % 20 == 0 and self.y > 0: 
             self.y -= 1
+            return '{"result":"success"}'
+        else:
+            return '{"result":"blocked"}'
 
     def down(self):
         if self.x % 20 == 0 and self.y < 580:
             self.y += 1
+            return '{"result":"success"}'
+        else:
+            return '{"result":"blocked"}'        
     
     def left(self):
         if self.y % 20 == 0 and self.x > 0:
             self.x -= 1
-    
+            return '{"result":"success"}'
+        else:
+            return '{"result":"blocked"}'
+            
     def right(self):
         if self.y % 20 == 0 and self.x < 780:
             self.x += 1
-               
+            return '{"result":"success"}'
+        else:
+            return '{"result":"blocked"}'
+                       
     def draw(self, pygame, screen):
         pygame.draw.rect(screen, (255, 255, 0), [self.x, self.y, SIZE, SIZE], 2) 
 
     
     def to_json(self):
-        return '{ "id" : "' + self.id + ', "x" : "' + self.x + '", "y" : "' + self.y + '", "condition" : "' + self.condition + '" }'
-    
-    def vision_to_json(self):
-        return '{}'
+        return '{ "id" : "' + self.id + '" , "x" : "' + str(self.x) + '", "y" : "' + str(self.y) + '", "condition" : "' + self.condition + '" }'

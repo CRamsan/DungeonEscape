@@ -65,18 +65,24 @@ class GetHandler(BaseHTTPRequestHandler):
             return server.game.to_json()
         elif len(path) == 1:
             return server.game.get_player(path[0]).to_json()
+        elif len(path) == 2:
+            player = server.game.get_player(path[0])
+            if player.validate_token(path[1]) :
+                return server.game.get_player(path[0]).units_to_json()
+            else:
+                return '{"result":"failed"}'
         elif len(path) == 3:
             player = server.game.get_player(path[0])
             target = None
-            if player.validate_token(path[1]) :
-                target = player.get_unit(path[2])
+            if player.validate_token(path[2]) :
+                target = player.get_unit(path[1])
             else:
                 return '{"result":"failed"}'
-            val = query.split('=')[0]
+            val = query.split('=')[1]
             if val == 'unit_info':
                 return target.to_json()
             elif val == 'unit_vision':
-                return target.vision_to_json()
+                return server.game.vision_to_json(target)
         return '{"result":"failed"}'
     
     def post_Execute(self, path, form):
@@ -89,8 +95,10 @@ class GetHandler(BaseHTTPRequestHandler):
                 return '{"result":"failed"}'
         else :
             player = server.game.get_player(path[0])
-            if player.validate_token(path[1]) :
-                return self.game.execute_command(player, player.get_unit(path[2]), form[form.keys()[0]].value) 
+            print 'player ' + str(player)
+            if player.validate_token(path[2]) :
+                unit = player.get_unit(path[1])
+                return server.game.execute_command(player.id, unit.id , form[form.keys()[0]].value) 
             else:   
                 return '{"result":"failed"}'
 
