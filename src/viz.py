@@ -20,15 +20,15 @@ class Visualizer():
         pygame.display.set_caption('DS') 
         screen = pygame.display.get_surface() 
          
-        unit = pygame.image.load("../assets/star.png")
+        '''unit = pygame.image.load("../assets/star.png")
         unitrect = unit.get_rect()
         
         wall = pygame.image.load("../assets/black.png")
         wallrect = wall.get_rect()
         
         floor = pygame.image.load("../assets/green.png")
-        floorrect = floor.get_rect()
-        
+        floorrect = floor.get_rect()'''
+
         # Loop until the user clicks the close button.
         done = False
         clock = pygame.time.Clock()
