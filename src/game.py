@@ -73,22 +73,28 @@ class Game(drawable):
         target = self.get_player(player).get_unit(unit)
         
         moveCapable = self.move_capable(target, command)
-        print moveCapable
-        if target.x % 20 == 0 and moveCapable:
-            if command == 'up' :
+        if command == 'up' :
+            if target.x % 20 == 0 and moveCapable:
                 return target.up()
-            elif command == 'down' :
+            else:
+                return '{"result":"failed", "reason":"Y movement failed"}'
+        elif command == 'down' :
+            if target.x % 20 == 0 and moveCapable:
                 return target.down()
             else:
-                return '{"result":"failed"}'
-        if target.y % 20 == 0 and moveCapable:
-            if command == 'left' :
+                return '{"result":"failed", "reason":"Y movement failed"}'
+        if command == 'left' :
+            if target.y % 20 == 0 and moveCapable:
                 return target.left()
-            elif command == 'right' :
+            else:
+                return '{"result":"failed", "reason":"X movement failed"}'
+        elif command == 'right' :
+            if target.y % 20 == 0 and moveCapable:
                 return target.right()
             else:
-                return '{"result":"failed"}'
-        return '{"result":"failed"}'
+                return '{"result":"failed", "reason":"X movement failed"}'
+        else:
+            return '{"result":"failed", "reason":"X/Y movement failed"}'        
     
     def get_player(self, playerid):
         for player in self.players :
@@ -136,7 +142,7 @@ class Game(drawable):
     def vision_to_json(self, target):
         found = []
         for unit in units:
-            if  fabs(unit.x - target.x) < 10 and fabs(unit.y - target.y) < 10 :
+            if  fabs(unit.x - target.x) < 100 and fabs(unit.y - target.y) < 10 :
                 if unit.owner != target.owner :
                     found.append(unit)
         message = '{ "units":[ '

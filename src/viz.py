@@ -6,13 +6,16 @@ import time
 HEIGHT = 30
 WIDTH = 40
 
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+DARKBLUE = (0,0,128)
+PINK = (255,200,200)
+
 class Visualizer():
     def vis_loop(self, game):      
-        BLACK = (0, 0, 0)
-        WHITE = (255, 255, 255)
-        BLUE = (0, 0, 255)
-        GREEN = (0, 255, 0)
-        RED = (255, 0, 0)
          
         pygame.init() 
          

@@ -3,10 +3,15 @@ from random import randint
 from viz import drawable
 
 SIZE = 20
-TL = (20, 20)
+'''TL = (20, 20)
 TR = (760, 20)
 BR = (760, 560)
-BL = (20, 560)
+BL = (20, 560)'''
+
+TL = (500, 160)
+TR = (580, 160)
+BR = (580, 300)
+BL = (500, 300)
 
 class Unit(drawable):
     
@@ -16,7 +21,15 @@ class Unit(drawable):
         self.condition = 'Normal'
         self.owner = owner
         self.utype = utype
-        
+        if self.owner == 1 :
+            self.color = (0, 255, 255)
+        elif self.owner == 2 :
+            self.color = (0, 255, 0)
+        elif self.owner == 3 :
+            self.color = (255, 0, 0)
+        elif self.owner == 4 :
+            self.color = (255, 255, 255)
+                
         if self.owner == 1 :
             self.x = TL[0]
             self.y = TL[1]            
@@ -70,7 +83,7 @@ class Unit(drawable):
             return '{"result":"blocked"}'
                        
     def draw(self, pygame, screen):
-        pygame.draw.rect(screen, (255, 255, 0), [self.x, self.y, SIZE, SIZE], 2) 
+        pygame.draw.rect(screen, self.color , [self.x, self.y, SIZE, SIZE], 2)  
 
     
     def to_json(self):

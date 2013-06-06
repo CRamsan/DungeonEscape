@@ -70,20 +70,20 @@ class GetHandler(BaseHTTPRequestHandler):
             if player.validate_token(path[1]) :
                 return server.game.get_player(path[0]).units_to_json()
             else:
-                return '{"result":"failed"}'
+                return '{"result":"failed", "reason":"error while authorizing"}'
         elif len(path) == 3:
             player = server.game.get_player(path[0])
             target = None
             if player.validate_token(path[2]) :
                 target = player.get_unit(path[1])
             else:
-                return '{"result":"failed"}'
+                return '{"result":"failed", "reason":"error while authorizing"}'
             val = query.split('=')[1]
             if val == 'unit_info':
                 return target.to_json()
             elif val == 'unit_vision':
                 return server.game.vision_to_json(target)
-        return '{"result":"failed"}'
+        return '{"result":"failed", "reason":"error while parsing arguments"}'
     
     def post_Execute(self, path, form):
         if len(path) == 0:
@@ -92,15 +92,14 @@ class GetHandler(BaseHTTPRequestHandler):
             if path[0] == 'join':
                 return server.join_game(form[form.keys()[0]].value) 
             else :
-                return '{"result":"failed"}'
+                return '{"result":"failed"}, "reason":"error while parsing argument"'
         else :
             player = server.game.get_player(path[0])
-            print 'player ' + str(player)
             if player.validate_token(path[2]) :
                 unit = player.get_unit(path[1])
                 return server.game.execute_command(player.id, unit.id , form[form.keys()[0]].value) 
             else:   
-                return '{"result":"failed"}'
+                return '{"result":"failed"}, "reason":"error while authorizing"'
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -132,7 +131,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
             return '{ "playerID" : "' + newPlayer[0] + '", "playerToken" : "' + newPlayer[1] + '"}'
         else:
             print name + ' is trying to join but game is full'
-            return '{"result":"failed"}'
+            return '{"result":"failed", "reason":"game is full"}'
 
 
 
