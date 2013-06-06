@@ -25,8 +25,7 @@ class GetHandler(BaseHTTPRequestHandler):
         'client_address=%s (%s)' % (self.client_address, self.address_string()),
         'command=%s' % self.command,
         'path=%s' % parsed_path.path,
-        'query=%s' % parsed_path.query,
-        ]) 
+        'query=%s' % parsed_path.query ]) 
         print message
         
         arguments = filter(None, parsed_path.path.split('/'))

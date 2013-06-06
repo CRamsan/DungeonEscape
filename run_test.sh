@@ -3,10 +3,6 @@ curl --data 'param=cesar2'  http://localhost:1866/join &
 curl --data 'param=cesar3'  http://localhost:1866/join &
 curl --data 'param=cesar4'  http://localhost:1866/join &
 
-curl  http://localhost:1866/ABC/ABC/ABCD?information=unit_vision
-
-exit
-
 while :
 do
     r=$((RANDOM%4))

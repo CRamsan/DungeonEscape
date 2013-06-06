@@ -3,15 +3,16 @@ from random import randint
 from viz import drawable
 
 SIZE = 20
-'''TL = (20, 20)
+TL = (20, 20)
 TR = (760, 20)
 BR = (760, 560)
-BL = (20, 560)'''
+BL = (20, 560)
 
-TL = (500, 160)
+'''TL = (500, 160)
 TR = (580, 160)
 BR = (580, 300)
 BL = (500, 300)
+'''
 
 class Unit(drawable):
     
