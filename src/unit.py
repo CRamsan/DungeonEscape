@@ -2,12 +2,14 @@ import util
 from random import randint
 from viz import drawable
 from math import pi
+from game import SIZE
+from viz import WIN_HEIGHT
+from viz import WIN_WIDTH
 
-SIZE = 20
-TL = (20, 20)
-TR = (760, 20)
-BR = (760, 560)
-BL = (20, 560)
+TL = (SIZE, SIZE)
+TR = (WIN_WIDTH - (2 * SIZE), SIZE)
+BR = (WIN_WIDTH - (2 * SIZE), WIN_HEIGHT - (2 * SIZE))
+BL = (SIZE, WIN_HEIGHT - (2 * SIZE))
 
 '''TL = (500, 160)
 TR = (580, 160)
@@ -65,7 +67,7 @@ class Unit(drawable):
             self.x -= SIZE
             
     def up(self):
-        if self.x % 20 == 0 and self.y > 0: 
+        if self.x % SIZE == 0 and self.y > 0: 
             self.y -= 1
             self.rad_start = 3 * pi / 4
             self.rad_end = 9 * pi / 4
@@ -80,7 +82,7 @@ class Unit(drawable):
             return '{"result":"blocked"}'
 
     def down(self):
-        if self.x % 20 == 0 and self.y < 580:
+        if self.x % SIZE == 0 and self.y < WIN_HEIGHT - SIZE:
             self.y += 1
             self.rad_start = 7 * pi / 4
             self.rad_end = 13 * pi / 4
@@ -95,7 +97,7 @@ class Unit(drawable):
             return '{"result":"blocked"}'        
     
     def left(self):
-        if self.y % 20 == 0 and self.x > 0:
+        if self.y % SIZE == 0 and self.x > 0:
             self.x -= 1
             self.A1 = 0
             self.A2 = SIZE / 2
@@ -110,7 +112,7 @@ class Unit(drawable):
             return '{"result":"blocked"}'
             
     def right(self):
-        if self.y % 20 == 0 and self.x < 780:
+        if self.y % SIZE == 0 and self.x < WIN_WIDTH - SIZE:
             self.x += 1
             self.A1 = SIZE
             self.A2 = SIZE / 2

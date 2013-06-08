@@ -3,8 +3,8 @@ from pygame.locals import *
 import random
 import time
 
-HEIGHT = 30
-WIDTH = 40
+WIN_HEIGHT = 800
+WIN_WIDTH = 600
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -19,7 +19,7 @@ class Visualizer():
          
         pygame.init() 
          
-        window = pygame.display.set_mode((800, 600)) 
+        window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT)) 
         pygame.display.set_caption('DS') 
         screen = pygame.display.get_surface() 
 

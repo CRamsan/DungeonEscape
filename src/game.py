@@ -58,6 +58,11 @@ class Game(drawable):
         self.players = []
         self.turn = 0;
     
+	def generate_map(self)
+	    for colum in matrix:
+		    for tile in colum:
+			    tile = 'B'
+	
     def start_new_game(self):
         self.id = util.id_generator()
         self.state = 'Waiting for players'
