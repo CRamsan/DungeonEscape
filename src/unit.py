@@ -22,6 +22,8 @@ class Unit(drawable):
         self.condition = 'Normal'
         self.owner = owner
         self.utype = utype
+        self.rad_start = 0
+        self.rad_end = 0
         if self.owner == 1 :
             self.color = (0, 255, 255)
         elif self.owner == 2 :
@@ -58,6 +60,8 @@ class Unit(drawable):
     def up(self):
         if self.x % 20 == 0 and self.y > 0: 
             self.y -= 1
+            self.rad_start = 135
+            self.rad_end = 45
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'
@@ -65,6 +69,8 @@ class Unit(drawable):
     def down(self):
         if self.x % 20 == 0 and self.y < 580:
             self.y += 1
+            self.rad_start = 315
+            self.rad_end = 225
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'        
@@ -72,6 +78,8 @@ class Unit(drawable):
     def left(self):
         if self.y % 20 == 0 and self.x > 0:
             self.x -= 1
+            self.rad_start = 225
+            self.rad_end = 135
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'
@@ -79,12 +87,14 @@ class Unit(drawable):
     def right(self):
         if self.y % 20 == 0 and self.x < 780:
             self.x += 1
+            self.rad_start = 45
+            self.rad_end = 315
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'
                        
     def draw(self, pygame, screen):
-        pygame.draw.rect(screen, self.color , [self.x, self.y, SIZE, SIZE], 2)  
+        pygame.draw.arc(screen, self.color, [self.x, self.y, SIZE, SIZE], self.rad_start, self.rad_end, 2)
 
     
     def to_json(self):
