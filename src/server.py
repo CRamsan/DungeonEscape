@@ -20,13 +20,6 @@ viz = None
 class GetHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed_path = urlparse.urlparse(self.path)
-        message = '|'.join([
-        threading.currentThread().getName(),
-        'client_address=%s (%s)' % (self.client_address, self.address_string()),
-        'command=%s' % self.command,
-        'path=%s' % parsed_path.path,
-        'query=%s' % parsed_path.query ]) 
-        print message
         
         arguments = filter(None, parsed_path.path.split('/'))
         result = self.get_Execute(arguments, parsed_path.query)
@@ -41,20 +34,9 @@ class GetHandler(BaseHTTPRequestHandler):
         environ={'REQUEST_METHOD':'POST',
         'CONTENT_TYPE':self.headers['Content-Type'],
         })
-        
-        # Begin the response
-        message = '|'.join([
-        threading.currentThread().getName(),
-        'client_address=%s (%s)' % (self.client_address, self.address_string()),
-        'command=%s' % self.command,
-        'path=%s' % self.path])
-        
+             
         arguments = filter(None, self.path.split('/'))
-        
-        for field in form.keys():
-            message = '|'.join([message, '%s=%s' % (field, form[field].value)])
-        print message
-        
+           
         result = self.post_Execute(arguments, form)
         self.wfile.write(result)
         return

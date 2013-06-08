@@ -1,6 +1,7 @@
 import util
 from random import randint
 from viz import drawable
+from math import pi
 
 SIZE = 20
 TL = (20, 20)
@@ -22,8 +23,14 @@ class Unit(drawable):
         self.condition = 'Normal'
         self.owner = owner
         self.utype = utype
+        self.A1 = SIZE / 2
+        self.A2 = 0
+        self.B1 = 0
+        self.B2 = SIZE
+        self.C1 = SIZE
+        self.C2 = SIZE
         self.rad_start = 0
-        self.rad_end = 0
+        self.rad_end = 2 * pi 
         if self.owner == 1 :
             self.color = (0, 255, 255)
         elif self.owner == 2 :
@@ -60,8 +67,14 @@ class Unit(drawable):
     def up(self):
         if self.x % 20 == 0 and self.y > 0: 
             self.y -= 1
-            self.rad_start = 135
-            self.rad_end = 45
+            self.rad_start = 3 * pi / 4
+            self.rad_end = 9 * pi / 4
+            self.A1 = SIZE / 2
+            self.A2 = 0
+            self.B1 = 0
+            self.B2 = SIZE
+            self.C1 = SIZE
+            self.C2 = SIZE
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'
@@ -69,8 +82,14 @@ class Unit(drawable):
     def down(self):
         if self.x % 20 == 0 and self.y < 580:
             self.y += 1
-            self.rad_start = 315
-            self.rad_end = 225
+            self.rad_start = 7 * pi / 4
+            self.rad_end = 13 * pi / 4
+            self.A1 = 0
+            self.A2 = 0
+            self.B1 = SIZE / 2
+            self.B2 = SIZE
+            self.C1 = SIZE
+            self.C2 = 0
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'        
@@ -78,8 +97,14 @@ class Unit(drawable):
     def left(self):
         if self.y % 20 == 0 and self.x > 0:
             self.x -= 1
-            self.rad_start = 225
-            self.rad_end = 135
+            self.A1 = 0
+            self.A2 = SIZE / 2
+            self.B1 = SIZE
+            self.B2 = 0
+            self.C1 = SIZE
+            self.C2 = SIZE
+            self.rad_start = 5 * pi / 4
+            self.rad_end = 11 * pi / 4
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'
@@ -87,15 +112,21 @@ class Unit(drawable):
     def right(self):
         if self.y % 20 == 0 and self.x < 780:
             self.x += 1
-            self.rad_start = 45
-            self.rad_end = 315
+            self.A1 = SIZE
+            self.A2 = SIZE / 2
+            self.B1 = 0
+            self.B2 = 0
+            self.C1 = 0
+            self.C2 = SIZE
+            self.rad_start = pi / 4
+            self.rad_end = 7 * pi / 4
             return '{"result":"success"}'
         else:
             return '{"result":"blocked"}'
                        
     def draw(self, pygame, screen):
-        pygame.draw.arc(screen, self.color, [self.x, self.y, SIZE, SIZE], self.rad_start, self.rad_end, 2)
-
-    
+        pygame.draw.arc(screen, self.color, [self.x, self.y, SIZE, SIZE], self.rad_start, self.rad_end, 3)
+        pygame.draw.polygon(screen, self.color, [[self.x + self.A1, self.y + self.A2], [self.x + self.B1, self.y + self.B2], [self.x + self.C1, self.y + self.C2]], 3)
+   
     def to_json(self):
         return '{ "id" : "' + self.id + '" , "x" : "' + str(self.x) + '", "y" : "' + str(self.y) + '", "condition" : "' + self.condition + '" }'

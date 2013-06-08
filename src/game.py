@@ -2,14 +2,18 @@ import util
 import player
 from math import fabs
 from viz import drawable
-
+from time import sleep
 from player import Player
 
 SIZE = 20
-TL = (20, 20)
-TR = (760, 20)
-BR = (760, 560)
-BL = (20, 560)
+WIDTH = 40
+HEIGHT = 30
+VISION_RANGE = 100
+
+TL = (SIZE, SIZE)
+TR = ((SIZE * WIDTH) - (2 * SIZE), SIZE)
+BR = ((SIZE * WIDTH) - (2 * SIZE), (SIZE * HEIGHT) - (2 * SIZE))
+BL = (SIZE, (SIZE * HEIGHT) - (2 * SIZE))
 
 units = []
 
@@ -47,9 +51,6 @@ matrix = [
 ['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B' , 'B', 'B' , 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'],
 ]
 
-print len(matrix)
-print len(matrix[29])
-
 class Game(drawable):
     
     def __init__(self):
@@ -71,25 +72,29 @@ class Game(drawable):
     
     def execute_command(self, player, unit, command):
         target = self.get_player(player).get_unit(unit)
-        
+
         moveCapable = self.move_capable(target, command)
         if command == 'up' :
-            if target.x % 20 == 0 and moveCapable:
+            if target.x % SIZE == 0 and moveCapable:
+                print str(target.x) + " - " +str(target.y - 1) + "\n"
                 return target.up()
             else:
                 return '{"result":"failed", "reason":"Y movement failed"}'
         elif command == 'down' :
-            if target.x % 20 == 0 and moveCapable:
+            if target.x % SIZE == 0 and moveCapable:
+                print str(target.x) + " - " +str(target.y + 1) + "\n"
                 return target.down()
             else:
                 return '{"result":"failed", "reason":"Y movement failed"}'
         if command == 'left' :
-            if target.y % 20 == 0 and moveCapable:
+            if target.y % SIZE == 0 and moveCapable:
+                print str(target.x - 1) + " - " +str(target.y) + "\n"
                 return target.left()
             else:
                 return '{"result":"failed", "reason":"X movement failed"}'
         elif command == 'right' :
-            if target.y % 20 == 0 and moveCapable:
+            if target.y % SIZE == 0 and moveCapable:
+                print str(target.x + 1) + " - " +str(target.y) + "\n"
                 return target.right()
             else:
                 return '{"result":"failed", "reason":"X movement failed"}'
@@ -105,25 +110,35 @@ class Game(drawable):
         pass
     
     def move_capable(self, unit, command):
-        m_x = int((unit.x / 20))
-        m_y = int((unit.y / 20))
         if command == 'up' :
-            if matrix[m_y - 1][m_x] == 'A':
+            m_x = int((unit.x / SIZE))
+            m_y = int(((unit.y - 1) / SIZE))
+            print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
+            if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False
         elif command == 'down' :
-            if matrix[m_y + 1][m_x] == 'A':
+            m_x = int((unit.x / SIZE))
+            m_y = int(((unit.y + 1) / SIZE))
+            print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
+            if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False
         elif command == 'left' :
-            if matrix[m_y][m_x - 1] == 'A':
+            m_x = int(((unit.x - 1) / SIZE))
+            m_y = int((unit.y / SIZE))
+            print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
+            if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False        
         elif command == 'right' :
-            if matrix[m_y][m_x + 1] == 'A':
+            m_x = int(((unit.x + 1) / SIZE))
+            m_y = int((unit.y / SIZE))
+            print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
+            if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False
@@ -133,16 +148,16 @@ class Game(drawable):
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
                 if matrix[i][j] == 'A':
-                    pygame.draw.rect(screen, (0, 0, 255), [20 * j, 20 * i, 20, 20], 2)
+                    pygame.draw.rect(screen, (0, 0, 255), [SIZE * j, SIZE * i, SIZE, SIZE], 2)
                 elif matrix[i][j] == 'B':
-                    pygame.draw.rect(screen, (255, 0, 255), [20 * j, 20 * i, 20, 20], 2)
+                    pygame.draw.rect(screen, (255, 0, 255), [SIZE * j, SIZE * i, SIZE, SIZE], 2)
         for drawable in self.players:
             drawable.draw(pygame, screen)
             
     def vision_to_json(self, target):
         found = []
         for unit in units:
-            if  fabs(unit.x - target.x) < 100 and fabs(unit.y - target.y) < 10 :
+            if  fabs(unit.x - target.x) < VISION_RANGE and fabs(unit.y - target.y) < VISION_RANGE :
                 if unit.owner != target.owner :
                     found.append(unit)
         message = '{ "units":[ '

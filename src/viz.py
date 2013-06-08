@@ -22,15 +22,6 @@ class Visualizer():
         window = pygame.display.set_mode((800, 600)) 
         pygame.display.set_caption('DS') 
         screen = pygame.display.get_surface() 
-         
-        '''unit = pygame.image.load("../assets/star.png")
-        unitrect = unit.get_rect()
-        
-        wall = pygame.image.load("../assets/black.png")
-        wallrect = wall.get_rect()
-        
-        floor = pygame.image.load("../assets/green.png")
-        floorrect = floor.get_rect()'''
 
         # Loop until the user clicks the close button.
         done = False
@@ -57,8 +48,6 @@ class Visualizer():
             # Go ahead and update the screen with what we've drawn.
             # This MUST happen after all the other drawing commands.
             pygame.display.flip()
-            
-            '''game.test()'''
             
         # Be IDLE friendly
         pygame.quit()
