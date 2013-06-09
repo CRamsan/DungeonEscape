@@ -121,7 +121,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         print 'All players ready, starting game'
             
 if __name__ == "__main__":
-    server = ThreadedHTTPServer(('localhost', 1866), GetHandler)
+    server = ThreadedHTTPServer(('localhost', 8888), GetHandler)
     print 'Starting server'
     server.init_game()
     viz = Visualizer()
