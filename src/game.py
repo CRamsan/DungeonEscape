@@ -5,15 +5,12 @@ from viz import drawable
 from time import sleep
 from player import Player
 
-SIZE = 20
-WIDTH = 40
-HEIGHT = 30
-VISION_RANGE = 100
+import constants
 
-TL = (SIZE, SIZE)
-TR = ((SIZE * WIDTH) - (2 * SIZE), SIZE)
-BR = ((SIZE * WIDTH) - (2 * SIZE), (SIZE * HEIGHT) - (2 * SIZE))
-BL = (SIZE, (SIZE * HEIGHT) - (2 * SIZE))
+TL = (constants.SIZE, constants.SIZE)
+TR = ((constants.SIZE * constants.WIDTH) - (2 * constants.SIZE), constants.SIZE)
+BR = ((constants.SIZE * constants.WIDTH) - (2 * constants.SIZE), (constants.SIZE * constants.HEIGHT) - (2 * constants.SIZE))
+BL = (constants.SIZE, (constants.SIZE * constants.HEIGHT) - (2 * constants.SIZE))
 
 units = []
 
@@ -56,13 +53,20 @@ class Game(drawable):
     def __init__(self):
         self.state = 'Not Started'
         self.players = []
-        self.turn = 0;
+        self.turn = 0
     
-	def generate_map(self)
-	    for colum in matrix:
-		    for tile in colum:
-			    tile = 'B'
-	
+    def generate_map(self, matrix, start_h, end_h, start_v, end_v):
+        print str((end_h - start_h) * (end_v - start_v))+"\n"
+        if (end_h - start_h) * (end_v - start_v) > 25 :
+            self.generate_map(matrix, start_h, end_h / 2, start_v, end_v / 2)
+            self.generate_map(matrix, int(end_h / 2) + 1, end_h, start_v, end_v / 2)
+            self.generate_map(matrix, start_h, end_h / 2, int(start_v / 2) + 1, end_v)
+            self.generate_map(matrix, int(end_h / 2) + 1, end_h, int(start_v / 2) + 1, end_v)
+        else :
+            for i in range(start_v , end_v):
+                for j in range(start_h, end_h):
+                    matrix[j][i] = 'B'    
+
     def start_new_game(self):
         self.id = util.id_generator()
         self.state = 'Waiting for players'
@@ -80,25 +84,25 @@ class Game(drawable):
 
         moveCapable = self.move_capable(target, command)
         if command == 'up' :
-            if target.x % SIZE == 0 and moveCapable:
+            if target.x % constants.SIZE == 0 and moveCapable:
                 print str(target.x) + " - " +str(target.y - 1) + "\n"
                 return target.up()
             else:
                 return '{"result":"failed", "reason":"Y movement failed"}'
         elif command == 'down' :
-            if target.x % SIZE == 0 and moveCapable:
+            if target.x % constants.SIZE == 0 and moveCapable:
                 print str(target.x) + " - " +str(target.y + 1) + "\n"
                 return target.down()
             else:
                 return '{"result":"failed", "reason":"Y movement failed"}'
         if command == 'left' :
-            if target.y % SIZE == 0 and moveCapable:
+            if target.y % constants.SIZE == 0 and moveCapable:
                 print str(target.x - 1) + " - " +str(target.y) + "\n"
                 return target.left()
             else:
                 return '{"result":"failed", "reason":"X movement failed"}'
         elif command == 'right' :
-            if target.y % SIZE == 0 and moveCapable:
+            if target.y % constants.SIZE == 0 and moveCapable:
                 print str(target.x + 1) + " - " +str(target.y) + "\n"
                 return target.right()
             else:
@@ -116,32 +120,32 @@ class Game(drawable):
     
     def move_capable(self, unit, command):
         if command == 'up' :
-            m_x = int((unit.x / SIZE))
-            m_y = int(((unit.y - 1) / SIZE))
+            m_x = int((unit.x / constants.SIZE))
+            m_y = int(((unit.y - 1) / constants.SIZE))
             print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
             if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False
         elif command == 'down' :
-            m_x = int((unit.x / SIZE))
-            m_y = int(((unit.y + 1) / SIZE))
+            m_x = int((unit.x / constants.SIZE))
+            m_y = int(((unit.y + 1) / constants.SIZE))
             print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
             if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False
         elif command == 'left' :
-            m_x = int(((unit.x - 1) / SIZE))
-            m_y = int((unit.y / SIZE))
+            m_x = int(((unit.x - 1) / constants.SIZE))
+            m_y = int((unit.y / constants.SIZE))
             print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
             if matrix[m_y][m_x] == 'A':
                 return True
             else:
                 return False        
         elif command == 'right' :
-            m_x = int(((unit.x + 1) / SIZE))
-            m_y = int((unit.y / SIZE))
+            m_x = int(((unit.x + 1) / constants.SIZE))
+            m_y = int((unit.y / constants.SIZE))
             print "NEXT TILE: " + str(m_x) + " - " + str(m_y)
             if matrix[m_y][m_x] == 'A':
                 return True
@@ -153,9 +157,9 @@ class Game(drawable):
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
                 if matrix[i][j] == 'A':
-                    pygame.draw.rect(screen, (0, 0, 255), [SIZE * j, SIZE * i, SIZE, SIZE], 2)
+                    pygame.draw.rect(screen, (0, 0, 255), [constants.SIZE * j, constants.SIZE * i, constants.SIZE, constants.SIZE], 2)
                 elif matrix[i][j] == 'B':
-                    pygame.draw.rect(screen, (255, 0, 255), [SIZE * j, SIZE * i, SIZE, SIZE], 2)
+                    pygame.draw.rect(screen, (255, 0, 255), [constants.SIZE * j, constants.SIZE * i, constants.SIZE, constants.SIZE], 2)
         for drawable in self.players:
             drawable.draw(pygame, screen)
             

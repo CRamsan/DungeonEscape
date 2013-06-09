@@ -3,23 +3,14 @@ from pygame.locals import *
 import random
 import time
 
-WIN_HEIGHT = 800
-WIN_WIDTH = 600
-
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-BLUE = (0, 0, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-DARKBLUE = (0,0,128)
-PINK = (255,200,200)
+import constants
 
 class Visualizer():
     def vis_loop(self, game):      
          
         pygame.init() 
          
-        window = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT)) 
+        window = pygame.display.set_mode((constants.WIN_WIDTH, constants.WIN_HEIGHT)) 
         pygame.display.set_caption('DS') 
         screen = pygame.display.get_surface() 
 
@@ -41,7 +32,7 @@ class Visualizer():
             # inside the main while done==False loop.
              
             # Clear the screen and set the screen background
-            screen.fill(BLACK)
+            screen.fill(constants.BLACK)
             
             game.draw(pygame, screen)
                         
