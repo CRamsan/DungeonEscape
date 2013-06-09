@@ -54,23 +54,30 @@ class Game(drawable):
         self.state = 'Not Started'
         self.players = []
         self.turn = 0
+
+    def generate_the_map(self):
+        self.generate_map(matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, 2)
+        self.generate_map(matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, 3) 
+        self.generate_map(matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, 4)        
+        self.generate_map(matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, 5)
     
-    def generate_map(self, matrix, start_h, end_h, start_v, end_v):
-        print str((end_h - start_h) * (end_v - start_v))+"\n"
-        if (end_h - start_h) * (end_v - start_v) > 25 :
-            self.generate_map(matrix, start_h, end_h / 2, start_v, end_v / 2)
-            self.generate_map(matrix, int(end_h / 2) + 1, end_h, start_v, end_v / 2)
-            self.generate_map(matrix, start_h, end_h / 2, int(start_v / 2) + 1, end_v)
-            self.generate_map(matrix, int(end_h / 2) + 1, end_h, int(start_v / 2) + 1, end_v)
+
+    def generate_map(self, matrix, start_h, end_h, start_v, end_v, depth, skip):
+        if depth < 2:
+            self.generate_map(matrix, start_h,                             start_h + ((end_h - start_h)/2), start_v,                         start_v + ((end_v - start_v)/2), depth + 1, skip)
+            self.generate_map(matrix, start_h + ((end_h - start_h)/2) + 1, end_h,                           start_v,                         start_v + ((end_v - start_v)/2), depth + 1, skip)
+            self.generate_map(matrix, start_h,                             start_h + ((end_h - start_h)/2), start_v + ((end_v - start_v)/2), end_v,                           depth + 1, skip)
+            self.generate_map(matrix, start_h + ((end_h - start_h)/2) + 1, end_h,                           start_v + ((end_v - start_v)/2), end_v,                           depth + 1, skip)
         else :
-            for i in range(start_v , end_v):
-                for j in range(start_h, end_h):
-                    matrix[j][i] = 'B'    
+            for i in range(start_v , end_v + 1, skip):
+                for j in range(start_h, end_h + 1, skip):
+                    matrix[i][j] = 'B'
 
     def start_new_game(self):
         self.id = util.id_generator()
         self.state = 'Waiting for players'
             
+
     def add_new_player(self, name):
         if len(self.players) < 4:
             newPlayer = Player(name, len(self.players) + 1)

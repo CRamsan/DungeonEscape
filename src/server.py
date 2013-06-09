@@ -108,8 +108,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         elif len(self.game.players) == 4:                        
             print name + ' is last player, sending signal'
             self.semafore.notify_all()
-            self.semafore.release()
-            #game.generate_map(game.matrix, 0, constants.WIDTH, 0, constants.HEIGHT)
+            self.game.generate_the_map()
             return '{ "playerID" : "' + newPlayer[0] + '", "playerToken" : "' + newPlayer[1] + '"}'
         else:
             print name + ' is trying to join but game is full'
