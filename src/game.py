@@ -1,6 +1,7 @@
 import util
 import player
 import random
+from random import choice
 from math import fabs
 from viz import drawable
 from time import sleep
@@ -26,81 +27,96 @@ class Game(drawable):
 
     def generate_the_map(self, skip_1=2, skip_2=3, skip_3=9):
         self.matrix = []
-        for i in range(constants.HEIGHT + 1):
+        for i in range(constants.WIDTH + 1):
             tmp = []
-            for k in range(constants.WIDTH + 1):
-                tmp.append('C')
+            for k in range(constants.HEIGHT + 1):
+                tmp.append('B')
             self.matrix.append(tmp)
                     
-        self.generate_map(self.matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, skip_1, 'B') 
-        self.generate_map(self.matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, skip_2, 'B')        
-        self.generate_map(self.matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, skip_3, 'D')
-        #self.generate_map(self.matrix, 0, constants.WIDTH - 1, 0, constants.HEIGHT - 1, 0, 10, 'D')
+        self.generate_map(self.matrix) 
 
-    def generate_map(self, matrix, start_h, end_h, start_v, end_v, depth, skip, tile):
-        if depth < 3:
-            self.generate_map(self.matrix, start_h,                             start_h + ((end_h - start_h)/2), start_v,                         start_v + ((end_v - start_v)/2), depth + 1, skip, tile)
-            self.generate_map(self.matrix, start_h + ((end_h - start_h)/2) + 1, end_h,                           start_v,                         start_v + ((end_v - start_v)/2), depth + 1, skip, tile)
-            self.generate_map(self.matrix, start_h,                             start_h + ((end_h - start_h)/2), start_v + ((end_v - start_v)/2), end_v,                           depth + 1, skip, tile)
-            self.generate_map(self.matrix, start_h + ((end_h - start_h)/2) + 1, end_h,                           start_v + ((end_v - start_v)/2), end_v,                           depth + 1, skip, tile)
-        else :
-            if tile == 'D' :
-				for i in range(start_h, start_h + ((end_h - start_h)/2), skip) :
-					for j in range(start_v, start_v + ((end_v - start_v)/2), skip) :
-						matrix[j][i] = tile
-            else :
-                r = random.randint(0,2)
-                if r == 0 :
-                    self.create_cross(matrix,  start_h + ((end_h - start_h)/2) , start_v + ((end_v - start_v)/2), ((end_v - start_v)/2) - 1 )
-                elif r == 1 :
-                    for i in range(start_v , end_v + 1, skip):
-                        self.create_v_line(matrix,  start_h + ((end_h - start_h)/2) , start_v + ((end_v - start_v)/2), ((end_v - start_v)/2) - 1 )
-                elif r == 2 :
-                    for i in range(start_h , end_h + 1, skip):
-                        self.create_h_line(matrix,  start_h + ((end_h - start_h)/2) , start_v + ((end_v - start_v)/2), ((end_v - start_v)/2) - 1 )
-                            
-    def create_cross(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        self.up(matrix, x, y - 1, number - 1)
-        self.down(matrix, x, y + 1, number - 1)
-        self.left(matrix, x - 1, y, number - 1)
-        self.right(matrix, x + 1, y, number - 1)
-    
-    def create_h_line(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        self.left(matrix, x - 1, y, number - 1)
-        self.right(matrix, x + 1, y, number - 1)
+    def generate_map(self, matrix):
+        for i in range(len(self.matrix)/3):
+            v_start = i + 1
+            lower_bound = False
+            for j in range(v_start) :
+                v_limit = j
+                if v_limit >= (len(self.matrix[0])/3):
+                    v_limit = (len(self.matrix[0])/3) - 1
+                    lower_bound = True
+                    break
+                self.generate_cel(matrix, ((i*3) + 1), ((v_limit*3) + 1))
+            if lower_bound :
+                continue
+            for k in range(i) :
+                tmp = i - k - 1
+                self.generate_cel(matrix,((tmp*3) + 1), ((v_limit*3) + 1))
 
-    def create_v_line(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        self.up(matrix, x, y - 1, number - 1)
-        self.down(matrix, x, y + 1, number - 1)
+    def generate_cel(self, matrix, x, y):
+        matrix[x][y] = 'D'
+        options = ['u', 'd', 'l', 'r']
+        exits = 0
+        if x - 1 == 0:
+            options.remove('l')
+        if y - 1 == 0:
+            options.remove('u')
+        if x + 1 == constants.WIDTH - 1:
+            options.remove('r')
+        if y + 1 == constants.HEIGHT - 1:
+            options.remove('d')
         
-    def up(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        if number > 1 :
-            self.up(matrix, x, y - 1, number - 1)
-            
-    def down(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        if number > 1 :
-            self.up(matrix, x, y + 1, number - 1)
+        if x - 2 >= 0 :
+            if matrix[x - 2][y] == 'D':
+                matrix[x - 1][y] = 'D'
+                options.remove('l')
+                exits+=1
+                print "LEFT"
+                sleep(0.001)
+        if y - 2 >= 0 :
+            if matrix[x][y - 2] == 'D':
+                matrix[x][y - 1] = 'D'
+                print "UP"
+                exits+=1
+                options.remove('u')
+                sleep(0.001)
+        if x + 2 < constants.WIDTH - 1 :
+            if matrix[x + 2][y] == 'D':
+                matrix[x + 1][y] = 'D'
+                options.remove('r')
+                print "RIGHT"
+                exits+=1
+                sleep(0.001)
+        if y + 2 < constants.HEIGHT - 1:
+            if matrix[x][y + 2] == 'D':
+                matrix[x][y + 1] = 'D'
+                options.remove('d')
+                print "DOWN"
+                exits+=1
+                sleep(0.001)
 
-    def left(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        if number > 1 :
-            self.up(matrix, x-1, y, number - 1)
-
-    def right(self, matrix, x, y, number):
-        matrix[y][x] = 'B'
-        if number > 1 :
-            self.up(matrix, x+1, y, number - 1)            
-            
-                             
+        while exits < 4  and len(options) > 0:
+            if exits == 3:
+                if random.randint(0, 100) <= 100:
+                    break
+            if exits == 4:
+                if random.randint(0, 100) <= 85:
+                    break
+            direction = choice(options)
+            options.remove(direction)
+            if direction == 'l' :
+                matrix[x - 1][y] = 'D'
+            elif direction == 'u' :
+                matrix[x][y - 1] = 'D'
+            elif direction == 'r':
+                matrix[x + 1][y] = 'D'
+            elif direction == 'd' :
+                matrix[x][y + 1] = 'D'
+            exits+=1
+            sleep(0.001)
+                    
     def start_new_game(self):
         self.id = util.id_generator()
         self.state = 'Waiting for players'
-            
 
     def add_new_player(self, name):
         if len(self.players) < 4:
@@ -181,14 +197,14 @@ class Game(drawable):
         
     
     def draw(self, pygame, screen):
-        for i in range(len(self.matrix)):
-            for j in range(len(self.matrix[i])):
+        for i in range(len(self.matrix) - 1):
+            for j in range(len(self.matrix[i]) - 1):
                 if self.matrix[i][j] == 'B':
-                    pygame.draw.rect(screen, (0, 0, 255), [(constants.SIZE * j), (constants.SIZE * i), constants.SIZE, constants.SIZE], 2)
+                    pygame.draw.rect(screen, (0, 0, 255), [(constants.SIZE * i), (constants.SIZE * j), constants.SIZE, constants.SIZE], 2)
                 elif self.matrix[i][j] == 'C':
-                    pygame.draw.ellipse(screen, (255, 0, 255), [(constants.SIZE * j) + 9, (constants.SIZE * i) + 9, constants.SIZE - (2*9), constants.SIZE - (2*9)])
+                    pygame.draw.ellipse(screen, (255, 0, 255), [(constants.SIZE * i) + 9, (constants.SIZE * j) + 9, constants.SIZE - (2*9), constants.SIZE - (2*9)])
                 elif self.matrix[i][j] == 'D':
-                    pygame.draw.ellipse(screen, (255, 255, 0), [(constants.SIZE * j) + 7, (constants.SIZE * i) + 7, constants.SIZE - (2*7), constants.SIZE - (2*7)])
+                    pygame.draw.ellipse(screen, (255, 255, 0), [(constants.SIZE * i) + 7, (constants.SIZE * j) + 7, constants.SIZE - (2*7), constants.SIZE - (2*7)])
         for drawable in self.players:
             drawable.draw(pygame, screen)
             
